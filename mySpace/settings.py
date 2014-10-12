@@ -60,10 +60,6 @@ WSGI_APPLICATION = 'mySpace.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-#         'HOST': '122.144.131.13',
-#         'NAME': 'mySpace',
-#         'USER':'jkstore',
-#         'PASSWORD':'1234',
         'HOST': 'localhost',
         'NAME': 'mySpace',
         'USER':'root',
