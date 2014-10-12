@@ -1,0 +1,12 @@
+<article>
+	<div class="heading">
+		<h2><a href="/blog/{{article.id}}">{{article.title}}</a></h2>
+	</div>
+	<div class="content">
+		{% if article.image %}
+		<img src="{{MEDIA_URL}}{{article.image}}" class="inset" width="250px" height="100px" />
+		{% endif %}
+		{{article.content|striptags|slice:"200"}}
+	</div>
+	{% include 'common/info.html' %}
+</article>

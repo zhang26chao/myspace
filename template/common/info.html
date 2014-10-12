@@ -1,0 +1,9 @@
+<div class="info">
+	<p><span style="font-style:normal;">发表于 </span> {{article.create_time|date:"b d, Y"}} - <a href="/blog/{{article.id}}#comment">{{article.comment_set.all.count}} 评论</a>
+		{% if article.tags.all %}
+			 <span style="font-style:normal;"> - 标签</span> {% for tag in article.tags.all %}
+				<a href="/tag/{{tag.id}}">#{{tag.name}}</a>
+			{% endfor%}
+		{% endif %}
+	</p>
+</div>

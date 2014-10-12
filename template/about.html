@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+<article>
+	<div class="heading">
+		<h2>自我介绍</h2>
+	</div>
+	<div class="content">
+		屌丝程序员一枚，06年毕业，在IT界摸爬滚打已有8年之久。回首过往工作经历，真是不堪入目。从一开始做MIS、ERP到后来的手游行业，再到移动互联网，中途也曾跟风创业直至公司折戟沉沙，方迷途知返，重归电子商务。技术方面杂而不精，甚为惭愧，愿与诸君共勉。欢迎大家通过邮件和我联系、交流：<cite style="background:#ee4e4e;color:#fff;">zhang26chao#163.com</cite>，或者通过扫描网页右上方的微信二维码加我为好友。
+	</div>
+</article>
+
+<article id="message" class="comment">
+	<h3>留言</h3>
+	{% include 'common/comment.html' %}
+	{% include 'common/page.html' %}
+</article>
+
+<section>
+	<h3>给我留言</h3>
+	<form id="contact-form" action="/message/" method="post">
+		{% csrf_token %}
+	 	{% include 'common/form.html' %}   
+	</form>
+</section>
+{% endblock %}

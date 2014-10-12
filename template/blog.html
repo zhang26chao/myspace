@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block head %}
+	<link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/shCoreEmacs.css"/>
+	<script type="text/javascript" src="{{STATIC_URL}}js/syntaxhighlighter/shCore.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/syntaxhighlighter/shAutoloader.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/my.js"></script>
+	<script type="text/javascript">	
+		window.onload = loadBrush;
+	</script>
+{% endblock %}
+{% block content %}
+<article>
+	<div class="heading">
+		<h2>{{article.title|safe}}</h2>
+	</div>
+	<div class="content">
+		{% if article.image %}
+		<p><img src="{{MEDIA_URL}}{{article.image}}" width="100%"/></p>
+		{% endif %}
+		{{article.content|safe}}
+	</div>
+	{% include 'common/info.html' %}
+</article>
+<article id="comment" class="comment">
+	<h3>评论</h3>
+	{% include 'common/comment.html' %}
+	{% include 'common/page.html' %}
+</article>
+
+<section>
+	<h3>发表评论</h3>
+	<form id="contact-form" action="/comment/" method="post">
+	 	{% csrf_token %}
+		<input type="hidden" name="articleId" value="{{article.id}}">
+	    {% include 'common/form.html' %}           
+	</form>
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="box" id="tags">
+	{% if curTag %}
+		{% for article in list %}
+			{% include 'common/article.html' %}
+		{% endfor %}
+		{% include 'common/page.html' %}
+	{% else %}
+		<div class="tag">
+			<ul>
+				{% for tag in tagList %}
+					<li><a href="/tag/{{tag.0}}" class="button button-flat-royal">{{tag.1}} ({{tag.2}})</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+</div>
+{% endblock %}

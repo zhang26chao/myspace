@@ -1,0 +1,38 @@
+<fieldset>
+    <label><input name="nickname" id="nickname" value="昵称" onBlur="if(this.value=='') this.value='昵称'" onFocus="if(this.value =='昵称' ) this.value=''" /></label>
+    <label><input name="email" id="email" value="电子邮箱" onBlur="if(this.value=='') this.value='电子邮箱'" onFocus="if(this.value =='电子邮箱' ) this.value=''" /></label>
+    <textarea name="content" id="formContent" onBlur="if(this.value=='') this.value='内容'" onFocus="if(this.value =='内容' ) this.value=''">内容</textarea>
+    <img id="codeImg" src="/code/" title="看不清,换一张" style="cursor:pointer;" onclick="changeCode();"/><input name="code" id="code" value="验证码" onBlur="if(this.value=='') this.value='验证码'" onFocus="if(this.value =='验证码' ) this.value=''" style="width:80px;height:28px;padding:0 0 0 8px;margin-left:8px;" />
+    <div class="buttons">
+        <a href="javascript:void(0);" class="button button-flat-primary" onClick="document.getElementById('contact-form').reset()">清除</a>
+        <a href="javascript:void(0);" class="button button-flat-primary" onClick="submitForm();">发送</a>
+    </div>								
+    <script>
+    	function changeCode() {
+    		document.getElementById('codeImg').src = '/code?' + new Date().getTime();
+    	}
+    	
+    	function submitForm() {
+    		var check = function(id,expect) {
+    			return document.getElementById(id).value == expect;
+    		};
+    		if (check('nickname','昵称')) {
+       			alert('请填写昵称');
+        		return;
+      		}
+    		if (check('email','电子邮箱')) {
+       			alert('请填写电子邮箱');
+        		return;
+      		}
+    		if (check('formContent','内容')) {
+       			alert('请填写内容');
+        		return;
+      		}
+      		if (check('code','验证码')) {
+       			alert('请填写验证码');
+        		return;
+      		}
+      		document.getElementById('contact-form').submit()
+    	}
+    </script>			
+</fieldset>        

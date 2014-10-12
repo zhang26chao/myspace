@@ -1,0 +1,22 @@
+{% if paginator.num_pages > 1 %}
+<div id="pagination" class="pagination">
+	{% if page.has_previous %}
+		<span><a href="{{request.path}}?page={{page.previous_page_number}}{{anchor}}">上一页</a></span>
+	{% else %}
+		<span class="disabled">上一页</span>
+	{% endif %}
+	{% for range in page_range %}
+		{% if range == page.number %}
+			<span class="current">{{range}}</span>
+		{% else %}
+			<span><a href="{{request.path}}?page={{range}}{{anchor}}">{{range}}</a></span>
+		{% endif %}
+	{% endfor %}
+	{% if page.has_next %}
+		<span><a href="{{request.path}}?page={{page.next_page_number}}{{anchor}}">下一页</a></span>
+	{% else %}
+		<span class="disabled">下一页</span>
+	{% endif %}
+	共{{paginator.num_pages}}页
+</div>
+{% endif %}

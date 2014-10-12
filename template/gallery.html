@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block head %}
+	{% if curTag %}
+	<link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/jquery.fancybox.css"/>
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/fancybox/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.photo a').fancybox();
+		});
+	</script>
+	{% endif %}
+{% endblock %}
+{% block content %}
+<div class="box" id="gallery">
+	{% if curTag %}
+		<div class="photo">
+			<ul>
+			{% for photo in list %}
+			<li><a href="{{MEDIA_URL}}{{photo.image}}" data-fancybox-group="{{curTag.name}}" title="{{photo.title}}"><img src="{{MEDIA_URL}}{{photo.thumbnail}}"/></a></li>
+			{% endfor %}
+			{% include 'common/page.html' %}
+			</ul>
+		</div>
+	{% else %}
+		<div class="tag">
+			<ul>
+				{% for tag in tagList %}
+					<li><a href="/gallery/{{tag.0}}" class="button button-flat-royal">{{tag.1}} ({{tag.2}})</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+</div>
+{% endblock %}

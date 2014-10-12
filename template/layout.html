@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>{% if article.title %}{{article.title}} - Fred的闲言碎语{% else %}Fred的闲言碎语{% endif %}</title>
+	<meta name="description" content="{% if article.content %}{{article.content|striptags|slice:"200"}}{% else %}Fred的个人博客{% endif %}">
+	<meta name="author" content="Fred Zhang">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  	<link rel="stylesheet" href="{{STATIC_URL}}css/zerogrid.css">
+	<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}css/responsive.css">
+	<!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+      </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+		<script src="{{STATIC_URL}}js/html5.js"></script>
+		<script src="{{STATIC_URL}}js/css3-mediaqueries.js"></script>
+	<![endif]-->
+	<link href='{{STATIC_URL}}images/favicon.ico' rel='icon' type='image/x-icon'/>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<div class="wrap-body zerogrid">
+<header>
+	<div class="wrap-header">
+		<div id="logo">
+			<a href="/"><h1>知行合一</h1></a>
+			<p>业精于勤，荒于嬉；行成于思，毁于随。</p>
+		</div>
+		<nav>
+			<div class="wrap-nav">
+				<div class="menu">
+					<ul>
+						<li><a href="/" {% ifequal requestPath 'blog'%}class="current"{% endifequal %}>首页</a></li>
+						<li><a href="/tag" {% ifequal requestPath 'tag'%}class="current"{% endifequal %}>分类</a></li>
+						<li><a href="/gallery" {% ifequal requestPath 'gallery'%}class="current"{% endifequal %}>相册</a></li>
+						<li><a href="/about" {% ifequal requestPath 'about'%}class="current"{% endifequal %}>关于</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>
+<section id="content">
+	<div class="wrap-content">
+		<div class="row block">
+			<div id="main-content" class="col-2-3">
+				<div class="wrap-col">
+				{% block content %}
+     			{% endblock %}
+				</div>
+			</div>
+			<div id="sidebar" class="col-1-3">
+				<div class="wrap-col">
+					<div class="box">
+						<div class="heading"><h2>自我介绍</h2></div>
+						<div class="content">
+							<img src="{{STATIC_URL}}images/weixin.png" style="float:none;margin:0;border: 0px;"/>
+						</div>
+					</div>
+					<div class="box">
+						<div class="heading"><h2>分类</h2></div>
+						<div class="content">
+							<ul>
+								{% for tag in popularTagList %}
+								<li><a href="/tag/{{tag.0}}">{{tag.1}} ({{tag.2}})</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<!--
+					<div class="box">
+						<div class="heading"><h2>热门文章</h2></div>
+						<div class="content">
+							<ul>
+								{% for article in popularArticleList %}
+								<li><a href="/blog/{{article.0}}">{{article.1}}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+					-->
+					<div class="box">
+						<div class="heading"><h2>热门文章</h2></div>
+						<div class="content">
+							{% for article in popularArticleList %}
+							<div class="post">
+								{% if article.2 %}
+								<img src="{{MEDIA_URL}}{{article.2}}" class="inset" width="50px"/>
+								{% else %}
+								<img src="{{STATIC_URL}}images/default.jpg" class="inset" width="50px"/>
+								{% endif %}
+								<h4><a href="/blog/{{article.0}}">{{article.1}}</a></h4>
+								<p>{{article.3|date:"b d, Y"}}</p>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="box">
+						<div class="heading"><h2>最新评论</h2></div>
+						<div class="content">
+							<ul style="text-align:left;">
+								{% for comment in lastestCommentList %}
+								<li>
+									<div>{{comment.content|striptags}}</div>
+									<cite class="fn">{{comment.nickname}}</cite><span class="says">评论了</span><a href="/blog/{{comment.article.id}}">{{comment.article.title}}</a>
+								</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<footer>
+	<div class="copyright">
+		<p>Copyright © 2014 - Powered By <a href="https://www.djangoproject.com/" target="_blank" title="Django">Django</a> </p>
+	</div>
+</footer>
+</div>
+</body>
+</html>

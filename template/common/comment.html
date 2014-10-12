@@ -1,0 +1,12 @@
+<ol>
+	{% for comment in list %}
+		<li class="{% cycle row1,row2 %}">
+			<div>
+				<cite class="fn">{{comment.nickname}}</cite>
+				<span class="says">说道：</span>
+			</div>
+			<div class="time">{{comment.create_time|date:'b d,Y H:i'}}</div>
+			<div>{{comment.content|striptags}}</div>
+		</li>
+	{% endfor %}
+</ol>
