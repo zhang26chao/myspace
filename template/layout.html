@@ -94,7 +94,7 @@
 							{% for article in popularArticleList %}
 							<div class="post">
 								{% if article.2 %}
-								<img src="{{MEDIA_URL}}{{article.2}}" class="inset" width="50px"/>
+								<img src="{{MEDIA_URL}}{{article.2}}" class="inset" />
 								{% else %}
 								<img src="{{STATIC_URL}}images/default.jpg" class="inset" width="50px"/>
 								{% endif %}

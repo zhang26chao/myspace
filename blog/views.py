@@ -78,12 +78,19 @@ def tag(request, tagId):
     return render_to_response('tag.html', __buildResponse({'tagList':tagList}, request), context_instance=RequestContext(request))
     
 def message(request):
-    email = request.POST["email"]
-    nickname = request.POST["nickname"]
-    content = request.POST["content"]
-    message = Message(email=email, nickname=nickname, content=content)
-    message.save()
-    return HttpResponseRedirect('/about' + '#message')
+    _code = request.POST['code'] or ''
+    if not _code:
+        raise Http404
+    ca = Captcha(request)
+    if ca.check(_code):
+        email = request.POST["email"]
+        nickname = request.POST["nickname"]
+        content = request.POST["content"]
+        message = Message(email=email, nickname=nickname, content=content)
+        message.save()
+        return HttpResponseRedirect('/about' + '#message')
+    else:
+        raise Http404
 
 def gallery(request, tagId):
     cursor = connection.cursor()
@@ -146,7 +153,7 @@ def __getPopularTags():
 def __getPopularArticles():
     cursor = connection.cursor()
     cursor.execute("""
-        select a.id,a.title,a.image,a.create_time from blog_article a,
+        select a.id,a.title,a.micro,a.create_time from blog_article a,
             (SELECT 
                 article_id,count(*) count
             FROM 

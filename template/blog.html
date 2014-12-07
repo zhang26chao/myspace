@@ -15,7 +15,7 @@
 	</div>
 	<div class="content">
 		{% if article.image %}
-		<p><img src="{{MEDIA_URL}}{{article.image}}" width="100%"/></p>
+		<p class="img"><img src="{{MEDIA_URL}}{{article.image}}" /></p>
 		{% endif %}
 		{{article.content|safe}}
 	</div>
