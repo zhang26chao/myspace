@@ -1,0 +1,1 @@
+myspace是一个基于Django的博客项目，其中对Django分页进行了优化。
