@@ -161,13 +161,14 @@ nav .wrap-nav{display: inline-block; background: #91DBD1; width: 100%;}
 	font-size:13px; 
 	line-height:1.2em;
 	color:#a0a0a0; 
-	padding:7px 15px; 
+	padding:8px 15px; 
 	margin:0; 
 	font-family:Arial, Helvetica, sans-serif; 
 	border:1px solid #eeeeee; 
 	background: #ffffff;
 	outline:none;
 }
+#contact-form .code {width:80px;height:28px;padding:0 0 0 8px;margin-left:8px;}
 .buttons {padding-top:17px; text-align:right}
 .buttons a {margin-left:20px;}
 /* -------------------------------------------- */
@@ -305,4 +306,16 @@ div.pagination span.disabled {
 .button-flat-primary:active {
   background: #1495b7;
   color: #00647f;
+}
+ul.errorlist {
+    margin: 0;
+    padding: 0;
+}
+.errorlist li {
+    background-color: red;
+    color: white;
+    display: block;
+    font-size: 10px;
+    margin: 0 0 3px;
+    padding: 4px 5px;
 }

@@ -2,10 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from blog.views import blog
 from blog.views import index
-from blog.views import comment
 from blog.views import tag
 from blog.views import about
-from blog.views import message
 from blog.views import gallery
 from blog.views import code
 from django.conf import settings
@@ -19,13 +17,13 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^ckeditor/', include('ckeditor.urls')),
     url(r'^$', index),
-    url(r'^blog/(\d+)$', blog),
-    url(r'^comment/$', comment),
-    url(r'^message/$', message),
+    url(r'^index/$', index),
+    url(r'^blog/(\d*)$', blog),
     url(r'^tag/(\d*)$', tag),
     url(r'^about/$', about),
     url(r'^gallery/(\d*)$', gallery),
     url(r'^code/$', code),
+    (r'^search/', include('haystack.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG is False:
     urlpatterns += patterns('',

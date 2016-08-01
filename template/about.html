@@ -14,10 +14,9 @@
 	{% include 'common/comment.html' %}
 	{% include 'common/page.html' %}
 </article>
-
 <section>
 	<h3>给我留言</h3>
-	<form id="contact-form" action="/message/" method="post">
+	<form id="contact-form" action="/about/" method="post">
 		{% csrf_token %}
 	 	{% include 'common/form.html' %}   
 	</form>

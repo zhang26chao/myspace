@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'ckeditor',
     'blog',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -118,3 +119,9 @@ CKEDITOR_CONFIGS = {
 }
 DEFAULT_PAGE_SIZE = 10
 SERVER_NAME = '127.0.0.1:8000'
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}

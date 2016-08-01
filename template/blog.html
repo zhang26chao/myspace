@@ -15,7 +15,7 @@
 	</div>
 	<div class="content">
 		{% if article.image %}
-		<p class="img"><img src="{{MEDIA_URL}}{{article.image}}" /></p>
+		<p class="img"><a href="{{MEDIA_URL}}{{article.image}}" title="查看原图" target="_blank" style="display:inline-block;"><img src="{{MEDIA_URL}}{{article.image}}" /></a></p>
 		{% endif %}
 		{{article.content|safe}}
 	</div>
@@ -29,7 +29,7 @@
 
 <section>
 	<h3>发表评论</h3>
-	<form id="contact-form" action="/comment/" method="post">
+	<form id="contact-form" action="{{request.path}}" method="post">
 	 	{% csrf_token %}
 		<input type="hidden" name="articleId" value="{{article.id}}">
 	    {% include 'common/form.html' %}           

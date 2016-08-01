@@ -25,6 +25,7 @@ class Article(models.Model):
     class Meta:
         verbose_name = '文章'
         verbose_name_plural = '文章'
+        ordering = ['-create_time']
     
     def __unicode__(self):
         return self.title
@@ -33,10 +34,11 @@ class Article(models.Model):
         return self.comment_set.all().count()
     
     def save(self):
-        tmp = util.thumbnail(self.image, 120, 120);
-        self.thumbnail.save(tmp.name + '.png', tmp, save=False)
-        tmp = util.thumbnail(self.image, 58, 42)
-        self.micro.save(tmp.name + '.png', tmp, save=False)
+        if self.image:
+            tmp = util.thumbnail(self.image, 120, 120);
+            self.thumbnail.save(tmp.name + '.png', tmp, save=False)
+            tmp = util.thumbnail(self.image, 58, 42)
+            self.micro.save(tmp.name + '.png', tmp, save=False)
         super(Article, self).save(False, False)
     
 class Comment(models.Model):
@@ -49,6 +51,7 @@ class Comment(models.Model):
     class Meta:
         verbose_name = '评论'
         verbose_name_plural = '评论'
+        ordering = ['-create_time']
     
     def __unicode__(self):
         return self.email
@@ -62,6 +65,7 @@ class Message(models.Model):
     class Meta:
         verbose_name = '留言'
         verbose_name_plural = '留言'
+        ordering = ['-create_time']
     
     def __unicode__(self):
         return self.email
@@ -86,11 +90,13 @@ class Photo(models.Model):
     class Meta:
         verbose_name = '照片'
         verbose_name_plural = '照片'
+        ordering = ['-create_time']
     
     def __unicode__(self):
         return self.title
     
     def save(self):
-        suf = util.thumbnail(self.image, 120, 85)
-        self.thumbnail.save(suf.name + '.png', suf, save=False)
+        if self.image:
+            suf = util.thumbnail(self.image, 120, 85)
+            self.thumbnail.save(suf.name + '.png', suf, save=False)
         super(Photo, self).save(False, False)

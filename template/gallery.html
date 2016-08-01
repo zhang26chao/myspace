@@ -20,9 +20,9 @@
 			{% for photo in list %}
 			<li><a href="{{MEDIA_URL}}{{photo.image}}" data-fancybox-group="{{curTag.name}}" title="{{photo.title}}"><img src="{{MEDIA_URL}}{{photo.thumbnail}}"/></a></li>
 			{% endfor %}
-			{% include 'common/page.html' %}
 			</ul>
 		</div>
+		{% include 'common/page.html' %}
 	{% else %}
 		<div class="tag">
 			<ul>

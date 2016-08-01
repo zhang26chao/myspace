@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block content %}
+    {% if query %}
+        {% for result in page.object_list %}
+            <article>
+				<div class="heading">
+					<h2><a href="/blog/{{result.object.id}}">{{result.object.title}}</a></h2>
+				</div>
+				<div class="content">
+					{% if result.object.thumbnail %}
+					<img src="{{MEDIA_URL}}{{result.object.thumbnail}}" class="inset" />
+					{% endif %}
+					{{result.object.content|striptags|slice:"200"}}
+				</div>
+				<div class="info">
+					<p>
+						<span style="font-style:normal;">发表于 </span> 
+						{{result.object.create_time|date:"b d, Y"}} - <a href="/blog/{{result.object.id}}#comment">{{result.object.comment_set.all.count}} 评论</a>
+						{% if result.object.tags.all %}
+							 <span style="font-style:normal;"> - 标签</span> {% for tag in result.object.tags.all %}
+								<a href="/tag/{{tag.id}}">#{{tag.name}}</a>
+							{% endfor%}
+						{% endif %}
+					</p>
+				</div>
+			</article>
+        {% empty %}
+            <p>No results found.</p>
+        {% endfor %}
+
+        {% if page.has_previous or page.has_next %}
+            <div>
+                {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                |
+                {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+            </div>
+        {% endif %}
+    {% else %}
+        {# Show some example queries to run, maybe query syntax, something else? #}
+    {% endif %}
+{% endblock %}
